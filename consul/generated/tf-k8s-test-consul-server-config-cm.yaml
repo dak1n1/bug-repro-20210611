@@ -1,0 +1,30 @@
+# Source: consul/templates/server-config-configmap.yaml
+# StatefulSet to run the actual Consul server cluster.
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: tf-k8s-test-consul-server-config
+  namespace: consul
+  labels:
+    app: consul
+    chart: consul-helm
+    heritage: Helm
+    release: tf-k8s-test
+data:
+  extra-from-values.json: |-
+    {}
+
+  ui-config.json: |-
+    {
+      "ui_config": {
+        "enabled": true,
+        "metrics_provider": "prometheus",
+        "metrics_proxy": {
+          "base_url": "http://prometheus-server"
+        }
+      }
+    }
+  central-config.json: |-
+    {
+      "enable_central_service_config": true
+    }

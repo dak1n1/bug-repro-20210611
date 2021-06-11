@@ -1,0 +1,18 @@
+# Source: consul/templates/server-rolebinding.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: tf-k8s-test-consul-server
+  namespace: consul
+  labels:
+    app: consul
+    chart: consul-helm
+    heritage: Helm
+    release: tf-k8s-test
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: tf-k8s-test-consul-server
+subjects:
+  - kind: ServiceAccount
+    name: tf-k8s-test-consul-server

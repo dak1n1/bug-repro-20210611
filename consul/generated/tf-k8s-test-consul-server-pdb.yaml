@@ -1,0 +1,20 @@
+# Source: consul/templates/server-disruptionbudget.yaml
+# PodDisruptionBudget to prevent degrading the server cluster through
+# voluntary cluster changes.
+apiVersion: policy/v1beta1
+kind: PodDisruptionBudget
+metadata:
+  name: tf-k8s-test-consul-server
+  namespace: consul
+  labels:
+    app: consul
+    chart: consul-helm
+    heritage: Helm
+    release: tf-k8s-test
+spec:
+  maxUnavailable: 1
+  selector:
+    matchLabels:
+      app: consul
+      release: "tf-k8s-test"
+      component: server
