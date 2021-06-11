@@ -4,6 +4,8 @@ Reproducer for kubernetes-alpha provider crash
 ## Run the reproducer
 
 ```
+export KUBE_CONFIG_PATH=$KUBECONFIG
+
 terraform init
 terraform validate
 terraform plan
